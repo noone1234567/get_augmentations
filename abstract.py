@@ -1,8 +1,29 @@
 from abc import ABC, abstractmethod
 
 class VideoProcessor(ABC):
+    
     @abstractmethod
-    def run(self, video):
+    def set_params(self, **params):
+        '''
+        Sets parameters for the filter.
+
+        Args:
+            params: dictionary to change the parameters.
+        '''
+        pass
+        
+    @abstractmethod
+    def get_params(self):
+        '''
+        Gets parameters for the filter.
+
+        Returns:
+            params: dictionary of the parameters.
+        '''
+        pass
+    
+    @abstractmethod
+    def run_filter(self, video):
         """
         Processes the given video.
 
@@ -12,9 +33,19 @@ class VideoProcessor(ABC):
         pass
 
     @abstractmethod
-    def get_params_and_range(self):
+    def count_psnr(self, video):
         """
-        Gets the parameters and range associated with the video processing.
+        Counts the given video psnr.
+
+        Args:
+            video (Video): The video to process.
+        """
+        pass
+        
+    @abstractmethod
+    def get_params_info(self):
+        """
+        Gets the parameters information and their ranges associated with the video processing.
 
         Returns:
             ParamsAndRange: The parameters and range.
