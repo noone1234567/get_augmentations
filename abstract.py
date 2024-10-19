@@ -1,16 +1,22 @@
 from abc import ABC, abstractmethod
 
-class VideoProcessor(ABC):
-    
+class VideoProcessor(ABC):        
+    def __init__(self):
+        self.filter = None
+        self.params = {}
+        
     @abstractmethod
-    def set_params(self, **params):
+    def set_params(self, filter, params):
         '''
         Sets parameters for the filter.
 
         Args:
+            filter: filter that is going to be applied to the rgb image
             params: dictionary to change the parameters.
         '''
-        pass
+        #self.filter = filter(**params) - sometimes won't work
+        #self.params = params
+        return
         
     @abstractmethod
     def get_params(self):
@@ -20,7 +26,7 @@ class VideoProcessor(ABC):
         Returns:
             params: dictionary of the parameters.
         '''
-        pass
+        return self.params
     
     @abstractmethod
     def run_filter(self, video):
@@ -33,7 +39,10 @@ class VideoProcessor(ABC):
         pass
 
     @abstractmethod
-    def count_psnr(self, video):
+    def run_oputna(self, needed_psnr, video)
+    
+    @abstractmethod
+    def count_psnr(self, video): #may be unnecessary
         """
         Counts the given video psnr.
 
@@ -43,7 +52,7 @@ class VideoProcessor(ABC):
         pass
         
     @abstractmethod
-    def get_params_info(self):
+    def get_params_info(self, **idk_yet):
         """
         Gets the parameters information and their ranges associated with the video processing.
 
