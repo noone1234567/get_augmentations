@@ -39,7 +39,13 @@ class VideoProcessor(ABC):
         pass
 
     @abstractmethod
-    def run_oputna(self, needed_psnr, video)
+    def run_optuna(self, **idk_yet):
+        """
+        runs optuna
+
+        returns: best trial
+        """
+        pass
     
     @abstractmethod
     def count_psnr(self, video): #may be unnecessary
