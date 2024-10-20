@@ -18,6 +18,7 @@ class VideoProcessor(ABC):
         #self.params = params
         return
         
+    @abstractmethod
     def get_params(self):
         '''
         Gets parameters for the filter.
@@ -28,7 +29,7 @@ class VideoProcessor(ABC):
         return self.params
     
     @abstractmethod
-    def run_filter(self, video):
+    def apply_filter_video(self, **rest):
         """
         Processes the given video.
 
@@ -38,7 +39,7 @@ class VideoProcessor(ABC):
         pass
 
     @abstractmethod
-    def run_optuna(self, **idk_yet):
+    def get_objective(self, **rest):
         """
         runs optuna
 
@@ -46,15 +47,6 @@ class VideoProcessor(ABC):
         """
         pass
     
-    @abstractmethod
-    def count_psnr(self, video): #may be unnecessary
-        """
-        Counts the given video psnr.
-
-        Args:
-            video (Video): The video to process.
-        """
-        pass
         
     @abstractmethod
     def get_params_info(self, **idk_yet):
