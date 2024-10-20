@@ -93,7 +93,7 @@ class MySpatter(VideoProcessor):
         print(res)
         return score
             
-    def get_params_info(self, **idk_yet):
+    def get_params_info(self):
         message = '''Algorithm Info
 
 This filter adds rain-like drops into every frame of the YUV-video
