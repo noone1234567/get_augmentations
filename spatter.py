@@ -26,7 +26,7 @@ class MySpatter(VideoProcessor):
     def get_params(self):
         return self.params
         
-    def apply_filter_video(self, input_path='videos/crowd_run_short_1920x1080_50.yuv', output_path=None, width=1920, height=1080, fps=50):
+    def apply_filter_video(self, input_path='videos/crowd_run_short_1920x1080_50.yuv', output_path='videos/out.yuv', width=1920, height=1080, fps=50):
         """
         Processes the given video.
         may be in the abstract class but some filters are applied differently - may be changed in the future
