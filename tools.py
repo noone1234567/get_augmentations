@@ -15,6 +15,7 @@ from scipy.stats import spearmanr
 import torch.nn as nn
 import cv2
 import numpy as np
+import albumentations
 
 
 # Function to read YUV 4:2:0 frame and convert it to RGB
