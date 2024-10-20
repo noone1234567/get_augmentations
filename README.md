@@ -5,9 +5,9 @@ Also don't forget to pass the same output file in optuna(not passing any should 
 files look like this:  
   
 Your folder  
-  spatter.py  
-  tools.py  
-  abstract.py
-  videos  
-    crowd_run_short_1920x1080_50.yuv  
-    ...
+.spatter.py  
+.tools.py  
+.abstract.py  
+.videos  
+..crowd_run_short_1920x1080_50.yuv  
+..the rest of the videos
