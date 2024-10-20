@@ -1,7 +1,7 @@
 from tools import *
 from abstract import *
 
-class MySpatter(VideoProcessor):        
+class MySpatter(VideoProcessor):
     def __init__(self):
         super().__init__() # self.params = {}
         self.filter_function = albumentations.Spatter
@@ -22,7 +22,10 @@ class MySpatter(VideoProcessor):
             if tuple_param in self.params:
                 self.params[tuple_param] = (self.params[tuple_param], self.params[tuple_param])
         self.filter = self.filter_function(**self.params)
-            
+
+    def get_params(self):
+        return self.params
+        
     def apply_filter_video(self, input_path='videos/crowd_run_short_1920x1080_50.yuv', output_path=None, width=1920, height=1080, fps=50):
         """
         Processes the given video.
@@ -47,7 +50,7 @@ class MySpatter(VideoProcessor):
                 frame_rgb, (Y, U, V) = s
                 
                 # Apply filter to the RGB frame
-                filtered_frame_rgb = apply_filter(frame_rgb, filter)
+                filtered_frame_rgb = self.filter(image=frame_rgb)['image']
                 
                 # Convert filtered RGB frame back to YUV
                 filtered_frame_yuv = cv2.cvtColor(filtered_frame_rgb, cv2.COLOR_RGB2YUV)
