@@ -18,7 +18,6 @@ class VideoProcessor(ABC):
         #self.params = params
         return
         
-    @abstractmethod
     def get_params(self):
         '''
         Gets parameters for the filter.
