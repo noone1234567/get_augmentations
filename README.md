@@ -1,3 +1,7 @@
+Before using optuna create a super-short(like 15 frames) yuv video to pass it, if you don't do that the computation will take forever  
+Also don't forget to pass the same output file in optuna(not passing any should work and save every filtered video in out.yuv  
+  
+  
 files look like this:  
   
 Your folder  
