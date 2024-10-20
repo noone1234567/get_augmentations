@@ -16,7 +16,9 @@ import torch.nn as nn
 import cv2
 import numpy as np
 import albumentations
+import optuna
 
+#много лишнего
 
 # Function to read YUV 4:2:0 frame and convert it to RGB
 def read_yuv_frame(f, width, height):
@@ -65,3 +67,22 @@ def parse_psnr_avg(file_path):
         return mean_psnr
     else:
         return None
+
+def start_optimization(
+    objective_func, # принимает trial, X_tr, y_tr, X_val, y_val, **other_objective_kwargs
+    n_trials,
+    n_jobs,
+    study_direction=None,
+    sampler=None,
+    features=None,
+    **other_objective_kwargs
+):
+    '''
+    function, performing optina optimization with given objective function. 
+    also it filterss data and scale it.
+    '''
+
+    obj_func = objective_func
+    study = optuna.create_study(sampler=sampler, direction='minimize')
+    study.optimize(obj_func, n_trials=n_trials, n_jobs= n_jobs)
+    return study
