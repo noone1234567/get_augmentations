@@ -79,10 +79,36 @@ def start_optimization(
 ):
     '''
     function, performing optina optimization with given objective function. 
-    also it filterss data and scale it.
+    also it filters data and scales it.
     '''
 
     obj_func = objective_func
     study = optuna.create_study(sampler=sampler, direction='minimize')
     study.optimize(obj_func, n_trials=n_trials, n_jobs= n_jobs)
     return study
+
+
+def sample_yuv_frames(input_path, output_file, width, height, num_frames=15):
+    y_size = width * height
+    u_size = y_size // 4
+    frame_size = y_size + 2 * u_size
+    with open(output_file, 'wb') as out_file:
+        with open(input_path, 'rb') as file:
+            file.seek(0, 2) 
+            file_size = file.tell()
+            total_frames = file_size // frame_size
+            num_frames = min(num_frames, total_frames)
+            interval = total_frames // num_frames
+            file.seek(0)
+            for i in range(num_frames):
+                frame_index = i * interval
+                file.seek(frame_index * frame_size)
+                y = file.read(y_size)
+                u = file.read(u_size)
+                v = file.read(u_size)
+                
+                out_file.write(y)
+                out_file.write(u)
+                out_file.write(v)
+
+    print(f"Saved {num_frames} frames to {output_file} in YUV format")
