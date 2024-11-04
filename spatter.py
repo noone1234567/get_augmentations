@@ -36,7 +36,7 @@ class MySpatter(VideoProcessor):
             output_path: the path where we save the filtered video
         """
         if output_path is None:
-            output_path = 'videos/spatter_trials/std={}intensity={}gauss_sigma={}.yuv'.format(self.params['std'][0],
+            output_path = 'videos/std={}intensity={}gauss_sigma={}.yuv'.format(self.params['std'][0],
                                                                                               self.params['intensity'][0],
                                                                                               self.params['gauss_sigma'][0])
         # Open the input YUV video
@@ -71,9 +71,9 @@ class MySpatter(VideoProcessor):
         os.system(command)
     
         return parse_psnr_avg(psnr_file)
-
+    
     def get_objective(self, trial, needed_psnr, input_path='videos/crowd_run_short_1920x1080_50.yuv', 
-                      output_path=None, width=1920, height=1080, fps=50):
+                      width=1920, height=1080, fps=50):
         '''
         function of objective loss(returns objective loss for log regrression) with suggested parameters
         '''
@@ -85,15 +85,34 @@ class MySpatter(VideoProcessor):
         
         filter_params = {"std":std, "intensity":intensity, "gauss_sigma":gauss_sigma}#, "cutout_threshold":cutout_threshold}
         self.set_params(filter_params)
-        res = self.apply_filter_video(input_path, output_path, width, height, fps)
-        
+        res = self.apply_filter_video(input_path, None, width, height, fps)
+        output_path = 'videos/std={}intensity={}gauss_sigma={}.yuv'.format(self.params['std'][0],
+                                                                           self.params['intensity'][0],
+                                                                           self.params['gauss_sigma'][0])
+        os.remove(output_path)
         if res is None:
             return 100
         score = np.abs(res - needed_psnr)
         print(res)
         return score
-            
-    def get_params_info(self):
+
+    def first_set(self, input_path='videos/crowd_run_short_1920x1080_50.yuv', psnr_file='new_psnr_spatter.txt', 
+                  output_path=None, width=1920, height=1080, fps=50):
+        std_values = [0.3, 0.6, 0.9]
+        intensity_values = [0.3, 0.6, 0.9]
+        gauss_sigma_values = [2.5, 5, 7.5]
+        
+        with open(psnr_file, 'a') as ughhh:
+            for std in std_values:
+                for intensity in intensity_values:
+                    for gauss_sigma in gauss_sigma_values:
+                        print(std, intensity, gauss_sigma)
+                        filter_params =  {'p':1, 'std': std, 'intensity': intensity, 'gauss_sigma': gauss_sigma}
+                        self.set_params(filter_params)
+                        self.apply_filter_video(input_path, output_path, width, height, fps)
+                        ughhh.write(f"std={std}intensity={intensity}gauss_sigma={gauss_sigma}psnr={res}\n")
+    
+    def get_params_info(self, **idk_yet):
         message = '''Algorithm Info
 
 This filter adds rain-like drops into every frame of the YUV-video
