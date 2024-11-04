@@ -32,9 +32,6 @@ class VideoProcessor(ABC):
     def apply_filter_video(self, **rest):
         """
         Processes the given video.
-
-        Args:
-            video (Video): The video to process.
         """
         pass
 
@@ -46,7 +43,13 @@ class VideoProcessor(ABC):
         returns: best trial
         """
         pass
-    
+
+    @abstractmethod
+    def first_set(self, **rest):
+        """
+        runs filter on grid of parameters
+        """
+        pass
         
     @abstractmethod
     def get_params_info(self, **idk_yet):
