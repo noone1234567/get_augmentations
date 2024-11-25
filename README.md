@@ -1,6 +1,6 @@
-Before using optuna create a super-short(like 15 frames) yuv video to pass it, use sample_yuv_frames function from tools.py
+"Before using optuna create a super-short(like 15 frames) yuv video to pass it, use sample_yuv_frames function from tools.py
 Also don't forget to pass the same output file in optuna(not passing any should work and save every filtered video in out.yuv  
-But passing the same output file will cause inability to set n_jobs != 1 
+But passing the same output file will cause inability to set n_jobs != 1 " - commited changes so this might actually work but i haven't checked yet
   
 files look like this:  
   
