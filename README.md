@@ -4,12 +4,14 @@ But passing the same output file will cause inability to set n_jobs != 1
   
 files look like this:  
   
-Your folder  
-.spatter.py  
-.tools.py  
-.abstract.py  
-.videos  
-..crowd_run_short_1920x1080_50.yuv  
-..the rest of the videos  
+Your folder 
+├── filters 
+│   ├── __init__.py 
+│   └── spatter.py 
+├── tools.py 
+├── abstract.py 
+├── videos 
+│   ├── crowd_run_short_1920x1080_50.yuv 
+│   └── ...
 
   link to mp4 filtered files: https://disk.yandex.com/d/d6FLdJa00PVgag
